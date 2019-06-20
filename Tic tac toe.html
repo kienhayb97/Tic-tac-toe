@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Caro Game Simple</h3>
+<p id="carogame"/>
+<input type="button" onclick="Tic_tac_toe()" value="Tic tac toe">
+<script>
+    let b = document.getElementById("carogame")
+    let board = [];
+    let data = "";
+    for (let i = 0; i < 10; i++) {
+        board[i] = new Array(".", ".", ".", ".", ".", ".", ".", ".", ".", ".");
+    }
+    let count = 0;
+
+    function hienthi() {
+        data = '';
+        data += "<table border='1px'>";
+        for (let i = 0; i < 10; i++) {
+            data += "<tr style='width: 40px;height: 40px'>"
+            for (let j = 0; j < 10; j++) {
+                data += "<td style='width: 40px;height: 40px' onclick='Tic_tac_toe("+i+","+j+")'>" + board[i][j] + "&nbsp;&nbsp;</td>";
+            }
+            data += "</tr>";
+        }
+        data += "</table>";
+        data += "<br/><br/><input type='button' value='Tic tac toe' onclick='Tic_tac_toe()'>"
+        b.innerHTML = data;
+    }
+
+    function Tic_tac_toe(positionX,positionY) {
+        let value="";
+        if(kiemtratontai(board[positionX][positionY])){
+        if (count % 2 == 0) {
+            value="X";
+        } else {
+            value="O";
+        }
+        board[positionX][positionY] =value;
+            count++;}
+        else {alert("moi nhap danh lai")}
+        hienthi();
+        result(value);
+    }
+    function result(value) {
+        if (kiemtra(value)) {
+            alert(value+" thang");
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    board[i][j]=".";
+                }
+            }
+        }
+    }
+    function kiemtra(value) {
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (board[i][j] == value && board[i][j + 1]==value && board[i][j + 2] == value) {
+                    return true;
+                }
+                else if (board[i][j] == value && board[i+1][j + 1]==value && board[i+2][j + 2] == value) {
+                    return true;
+                }
+                else if (board[i][j] == value && board[i+1][j]==value && board[i+2][j] == value){
+                    return true;
+                }
+                else if (board[i][j] == value && board[i+1][j - 1]==value && board[i+2][j - 2] == value) {
+                    return true;
+                }
+            }
+        }
+
+    }
+function kiemtratontai(value)
+{
+ if(value==".")
+ {
+     return true;
+ }
+ return false;
+
+}
+    hienthi();
+</script>
+</body>
+</html>
